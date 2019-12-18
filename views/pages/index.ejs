@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="../../public/styles/base.css">
+  <link rel="stylesheet" type="text/css" href="./public/styles/base.css">
   <title>Book Page</title>
 </head>
 <body>
@@ -29,5 +29,15 @@
     <button>Search Google's API for Great Reading Material</button>
     </fieldset>
   </form>
+
+  <main>
+    <div> 
+      <% books.forEach(book => { %>
+      <h3><%= book.volumeInfo.title %></h3>
+      <h4>by <%= book.volumeInfo.authors ? book.volumeInfo.authors.join(',') : 'unknowon' %></h4>
+      <% }) %>
+    </div>
+  </main>
+  
 </body>
 </html>

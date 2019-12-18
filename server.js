@@ -2,33 +2,29 @@
 
 //Constructors//
 const express = require('express');
-const ejs = require('ejs');
 const superagent = require('superagent');
+
+const app = express();
+
+app.set('view engine', 'ejs');
+app.use(express.static('./public'));
 const PORT = process.env.PORT || 3000;
 
 require('dotenv').config();
+const ejs = require('ejs');
 
-const app = express();
 app.use(express.urlencoded({extended: true}));
-app.use(express.static('./public'));
 
-app.set('view engine', 'ejs');
+
+
 
 app.get('/', (req, res) => {
-  res.render('./pages/index')
-});
-
-app.post('/', (req, res) => {
-  superagent.get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.author}`).then(data => {
-
-    const books = data.body.items.map(book => ({name: book.volumeInfo.title}));
-
-    console.log(books);
-
-    res.render('book-results', {
-      books: books
+  superagent.get(`https://www.googleapis.com/books/v1/volumes/?q=${ 'Of Mice and Men'}`)
+    .then(bookResponse => {
+      //console.log(bookResponse);
+      res.render('./pages/index.ejs', {books: bookResponse.body.items});
     });
-  });
+
 
 
 });

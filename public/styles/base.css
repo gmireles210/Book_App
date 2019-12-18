@@ -1,8 +1,14 @@
+div {
+  color: #4eb3d3;
+}
+
 body {
     background-color:#addd8e;
   }
 
-div {
-  color: lightslategray;
+body > h1 {
+  color: #4eb3d3;
 }
+
+
   

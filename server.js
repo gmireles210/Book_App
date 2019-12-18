@@ -14,12 +14,12 @@ app.use(express.static('./public'));
 
 app.set('view engine', 'ejs');
 
-app.get('/hello', (req,res) => {
-  res.render('pages/index')
+app.get('/', (req, res) => {
+  res.render('./pages/index')
 });
 
 app.post('/', (req, res) => {
-  superagent.get(`https://www.googleapis.com/books/v1/volumes?q=author+inauthor:${req.body.author}`).then(data => {
+  superagent.get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.author}`).then(data => {
 
     const books = data.body.items.map(book => ({name: book.volumeInfo.title}));
 
@@ -32,13 +32,6 @@ app.post('/', (req, res) => {
 
 
 });
-
-
-
-
-
-
-
 
 
 
